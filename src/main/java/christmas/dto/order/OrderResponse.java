@@ -1,25 +1,26 @@
 package christmas.dto.order;
 
+import christmas.constant.menu.Menu;
 import java.util.Map;
 
 public class OrderResponse {
 
-    private final Map<String, Integer> menuCounts;
-    private final int totalPrice;
+    private final Map<Menu, Integer> menuCounts;
     private final String giveawayMenu;
 
-    public OrderResponse(Map<String, Integer> menuCounts, int totalPrice, String giveawayMenu) {
+    public OrderResponse(Map<Menu, Integer> menuCounts, String giveawayMenu) {
         this.menuCounts = menuCounts;
-        this.totalPrice = totalPrice;
         this.giveawayMenu = giveawayMenu;
     }
 
-    public Map<String, Integer> getMenuCounts() {
-        return menuCounts;
+    public int getPriceBeforeDiscount() {
+        return menuCounts.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
+    public Map<Menu, Integer> getMenuCounts() {
+        return menuCounts;
     }
 
     public String getGiveawayMenu() {

@@ -1,4 +1,4 @@
-package christmas.model.discount;
+package christmas.entity.discount;
 
 import christmas.constant.discount.DiscountType;
 import java.util.Map;

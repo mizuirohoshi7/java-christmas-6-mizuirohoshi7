@@ -11,6 +11,12 @@ public class DiscountBenefit {
         this.discountPriceByType = discountPriceByType;
     }
 
+    public int getTotalDiscountPrice() {
+        return discountPriceByType.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
     public Map<DiscountType, Integer> getDiscountPriceByType() {
         return discountPriceByType;
     }

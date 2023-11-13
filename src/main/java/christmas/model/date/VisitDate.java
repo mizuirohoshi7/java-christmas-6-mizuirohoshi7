@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.model.date;
 
 import static christmas.constant.error.ErrorMessage.INVALID_VISIT_DATE;
 

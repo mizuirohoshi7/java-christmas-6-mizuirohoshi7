@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.model.order;
 
 import christmas.constant.menu.Menu;
 import java.util.Map;

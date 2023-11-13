@@ -1,4 +1,4 @@
-package christmas.constant.eventbadge;
+package christmas.constant.badge;
 
 public enum EventBadge {
 

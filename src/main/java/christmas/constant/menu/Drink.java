@@ -1,17 +1,16 @@
-package christmas.constant;
+package christmas.constant.menu;
 
-import christmas.constant.menu.Menu;
+public enum Drink implements Menu {
 
-public enum Dessert implements Menu {
-
-    CHOCOLATE_CAKE("초코케이크", 15000),
-    ICE_CREAM("아이스크림", 5000)
+    ZERO_COLA("제로콜라", 3000),
+    RED_WINE("레드와인", 60000),
+    CHAMPAGNE("샴페인", 25000)
     ;
 
     private final String food;
     private final int price;
 
-    Dessert(String food, int price) {
+    Drink(String food, int price) {
         this.food = food;
         this.price = price;
     }

@@ -13,6 +13,7 @@ import christmas.entity.date.VisitDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class Order {
 
@@ -31,8 +32,8 @@ public class Order {
     }
 
     public int getPriceBeforeDiscount() {
-        return menuCounts.values().stream()
-                .mapToInt(Integer::intValue)
+        return menuCounts.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
 
@@ -58,16 +59,17 @@ public class Order {
         if (CHRISTMAS_D_DAY_DISCOUNT_END_DAY < visitDate.getDay()) {
             return 0;
         }
-        return CHRISTMAS_D_DAY_DISCOUNT.getPrice() + CHRISTMAS_D_DAY_DISCOUNT_BY_DAY * visitDate.getDay();
+        return CHRISTMAS_D_DAY_DISCOUNT.getPrice() + CHRISTMAS_D_DAY_DISCOUNT_BY_DAY * (visitDate.getDay() - 1);
     }
 
     private int calculateWeekdayDiscount(VisitDate visitDate) {
         if (WEEKENDS.contains(visitDate.getDay())) {
             return 0;
         }
-        return (int) menuCounts.keySet().stream()
-                .filter(menu -> menu instanceof Dessert)
-                .count()
+        return menuCounts.entrySet().stream()
+                .filter(entry -> entry.getKey() instanceof Dessert)
+                .mapToInt(Entry::getValue)
+                .sum()
                 * WEEKDAY_DISCOUNT.getPrice();
     }
 
@@ -75,9 +77,10 @@ public class Order {
         if (!WEEKENDS.contains(visitDate.getDay())) {
             return 0;
         }
-        return (int) menuCounts.keySet().stream()
-                .filter(menu -> menu instanceof Main)
-                .count()
+        return menuCounts.entrySet().stream()
+                .filter(entry -> entry.getKey() instanceof Main)
+                .mapToInt(Entry::getValue)
+                .sum()
                 * WEEKEND_DISCOUNT.getPrice();
     }
 

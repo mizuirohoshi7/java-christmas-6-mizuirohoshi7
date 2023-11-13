@@ -87,4 +87,8 @@ public class Order {
         }
         return SPECIAL_DISCOUNT.getPrice();
     }
+
+    public Map<Menu, Integer> getMenuCounts() {
+        return menuCounts;
+    }
 }

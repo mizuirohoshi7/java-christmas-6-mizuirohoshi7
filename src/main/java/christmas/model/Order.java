@@ -10,4 +10,10 @@ public class Order {
     public Order(Map<Menu, Integer> menuCounts) {
         this.menuCounts = menuCounts;
     }
+
+    public int getPriceBeforeDiscount() {
+        return menuCounts.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }

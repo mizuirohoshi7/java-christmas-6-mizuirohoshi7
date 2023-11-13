@@ -19,11 +19,10 @@ import org.junit.jupiter.api.Test;
 class OrderTest {
 
     static Order order;
-    static Map<Menu, Integer> menuCounts;
 
     @BeforeAll
-    static void setUpMenuCounts() {
-        menuCounts = Map.of(
+    static void setUp() {
+        Map<Menu, Integer> menuCounts = Map.of(
                 Main.T_BONE_STAKE, 2,
                 Dessert.CHOCOLATE_CAKE, 3
         );
@@ -35,7 +34,7 @@ class OrderTest {
     void 할인_전_총_주문_금액_계산_성공() {
         int priceBeforeDiscount = order.getPriceBeforeDiscount();
 
-        assertThat(priceBeforeDiscount).isEqualTo(calculateTotalPrice(menuCounts));
+        assertThat(priceBeforeDiscount).isEqualTo(calculateTotalPrice(order.getMenuCounts()));
     }
 
     @Test

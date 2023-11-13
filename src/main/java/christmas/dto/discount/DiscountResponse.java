@@ -15,12 +15,12 @@ public class DiscountResponse {
     private final int priceBeforeDiscount;
 
     public DiscountResponse(Map<DiscountType, Integer> discountPriceByType, int priceBeforeDiscount) {
-        deleteZeroDiscountType();
+        deleteZeroDiscountType(discountPriceByType);
         this.discountPriceByType = discountPriceByType;
         this.priceBeforeDiscount = priceBeforeDiscount;
     }
 
-    private void deleteZeroDiscountType() {
+    private void deleteZeroDiscountType(Map<DiscountType, Integer> discountPriceByType) {
         discountPriceByType.entrySet().removeIf(entry -> entry.getValue() == 0);
     }
 
@@ -28,6 +28,10 @@ public class DiscountResponse {
         return discountPriceByType.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    public int getPriceAfterDiscount() {
+        return priceBeforeDiscount - getTotalDiscountPrice();
     }
 
     public String getEventBadge() {
@@ -45,9 +49,5 @@ public class DiscountResponse {
 
     public Map<DiscountType, Integer> getDiscountPriceByType() {
         return discountPriceByType;
-    }
-
-    public int getPriceBeforeDiscount() {
-        return priceBeforeDiscount;
     }
 }

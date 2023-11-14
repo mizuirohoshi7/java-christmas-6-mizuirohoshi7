@@ -1,6 +1,7 @@
 package christmas.entity.order;
 
 import static christmas.constant.discount.DiscountType.CHRISTMAS_D_DAY_DISCOUNT;
+import static christmas.constant.discount.DiscountType.GIVEAWAY_DISCOUNT;
 import static christmas.constant.discount.DiscountType.SPECIAL_DISCOUNT;
 import static christmas.constant.discount.DiscountType.WEEKDAY_DISCOUNT;
 import static christmas.constant.discount.DiscountType.WEEKEND_DISCOUNT;
@@ -51,6 +52,7 @@ public class Order {
         discountPriceByType.put(WEEKDAY_DISCOUNT, calculateWeekdayDiscount(visitDate));
         discountPriceByType.put(WEEKEND_DISCOUNT, calculateWeekendDiscount(visitDate));
         discountPriceByType.put(SPECIAL_DISCOUNT, calculateSpecialDiscount(visitDate));
+        discountPriceByType.put(GIVEAWAY_DISCOUNT, calculateGiveawayDiscount());
 
         return discountPriceByType;
     }
@@ -89,6 +91,13 @@ public class Order {
             return 0;
         }
         return SPECIAL_DISCOUNT.getPrice();
+    }
+
+    private int calculateGiveawayDiscount() {
+        if (getGiveawayMenu().equals(NOTHING)) {
+            return 0;
+        }
+        return GIVEAWAY_DISCOUNT.getPrice();
     }
 
     public Map<Menu, Integer> getMenuCounts() {

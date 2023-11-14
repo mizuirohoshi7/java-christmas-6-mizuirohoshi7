@@ -15,8 +15,8 @@ public class OrderResponse {
     }
 
     public int getPriceBeforeDiscount() {
-        return menuCounts.values().stream()
-                .mapToInt(Integer::intValue)
+        return menuCounts.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
 

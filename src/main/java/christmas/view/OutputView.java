@@ -48,7 +48,7 @@ public class OutputView {
 
     private static void printPriceBeforeDiscount(int priceBeforeDiscount) {
         System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE.getMessage());
-        System.out.printf("%d원\n", priceBeforeDiscount);
+        System.out.printf("%s원\n", NumberFormat.getInstance().format(priceBeforeDiscount));
         System.out.println();
     }
 

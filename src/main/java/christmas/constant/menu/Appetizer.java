@@ -1,5 +1,7 @@
 package christmas.constant.menu;
 
+import static christmas.constant.error.ErrorMessage.INVALID_ORDER;
+
 public enum Appetizer implements Menu {
 
     MUSHROOM_SOUP("양송이 수프", 6000),
@@ -23,5 +25,13 @@ public enum Appetizer implements Menu {
     @Override
     public int getPrice() {
         return price;
+    }
+
+    public static Appetizer of(String menu) {
+        try {
+            return valueOf(menu);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
     }
 }

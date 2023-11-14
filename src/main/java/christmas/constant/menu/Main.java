@@ -1,5 +1,7 @@
 package christmas.constant.menu;
 
+import static christmas.constant.error.ErrorMessage.INVALID_ORDER;
+
 public enum Main implements Menu {
 
     T_BONE_STAKE("티본스테이크", 55000),
@@ -24,5 +26,13 @@ public enum Main implements Menu {
     @Override
     public int getPrice() {
         return price;
+    }
+
+    public static Main of(String menu) {
+        try {
+            return valueOf(menu);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
     }
 }

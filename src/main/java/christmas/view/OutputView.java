@@ -72,11 +72,19 @@ public class OutputView {
                         "%s: -%s원\n",
                         discountType.getName(), NumberFormat.getInstance().format(discountPrice))
         );
+        if (discountPriceByType.isEmpty()) {
+            System.out.println(NOTHING.getMessage());
+        }
         System.out.println();
     }
 
     private static void printTotalDiscountPrice(int totalDiscountPrice) {
         System.out.println(TOTAL_DISCOUNT_PRICE_MESSAGE.getMessage());
+        if (totalDiscountPrice == 0) {
+            System.out.printf("%s원\n", NumberFormat.getInstance().format(totalDiscountPrice));
+            System.out.println();
+            return;
+        }
         System.out.printf("-%s원\n", NumberFormat.getInstance().format(totalDiscountPrice));
         System.out.println();
     }

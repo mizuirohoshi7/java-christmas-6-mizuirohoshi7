@@ -113,17 +113,25 @@ public class EventController {
 
     private Menu toMenu(String menu) {
         if (Appetizer.of(menu) != null) {
+            System.out.println(menu);
             return Appetizer.of(menu);
         }
         if (Dessert.of(menu) != null) {
+            System.out.println(menu);
+
             return Dessert.of(menu);
         }
         if (Main.of(menu) != null) {
+            System.out.println(menu);
+
             return Main.of(menu);
         }
         if (Drink.of(menu) != null) {
+            System.out.println(menu);
+
             return Drink.of(menu);
         }
+        System.out.println("no");
         throw new IllegalArgumentException(INVALID_ORDER.getMessage());
     }
 

@@ -60,12 +60,21 @@ public class EventController {
 
     private Order createOrder() {
         try {
-            Map<Menu, Integer> menuCounts = createMenuCounts(InputView.readOrder());
+            String orderInput = InputView.readOrder();
+            isValidOrderInput(orderInput);
+            Map<Menu, Integer> menuCounts = createMenuCounts(orderInput);
             isNotOnlyDrink(menuCounts);
             return new Order(menuCounts);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             return null;
+        }
+    }
+
+    // "메뉴-수량,메뉴-수량..." 형식이 아닌 경우 예외 발생
+    private void isValidOrderInput(String orderInput) {
+        if (!orderInput.matches("([가-힣]+-[0-9]+,)*[가-힣]+-[0-9]+")) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
@@ -103,16 +112,16 @@ public class EventController {
 
     private Menu toMenu(String menu) {
         if (Appetizer.of(menu) != null) {
-            return Appetizer.valueOf(menu);
+            return Appetizer.of(menu);
         }
         if (Dessert.of(menu) != null) {
-            return Dessert.valueOf(menu);
+            return Dessert.of(menu);
         }
         if (Main.of(menu) != null) {
-            return Main.valueOf(menu);
+            return Main.of(menu);
         }
         if (Drink.of(menu) != null) {
-            return Drink.valueOf(menu);
+            return Drink.of(menu);
         }
         throw new IllegalArgumentException(INVALID_ORDER.getMessage());
     }

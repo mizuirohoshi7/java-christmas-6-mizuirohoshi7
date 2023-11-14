@@ -1,11 +1,11 @@
 package christmas.constant.menu;
 
-import static christmas.constant.error.ErrorMessage.INVALID_ORDER;
+import java.util.Arrays;
 
 public enum Main implements Menu {
 
     T_BONE_STAKE("티본스테이크", 55000),
-    BARBEQUE_RIBS("바베큐립", 54000),
+    BARBEQUE_RIBS("바비큐립", 54000),
     SEAFOOD_PASTA("해산물파스타", 35000),
     CHRISTMAS_PASTA("크리스마스파스타", 25000)
     ;
@@ -28,11 +28,10 @@ public enum Main implements Menu {
         return price;
     }
 
-    public static Main of(String menu) {
-        try {
-            return valueOf(menu);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-        }
+    public static Main of(String food) {
+        return Arrays.stream(Main.values())
+                .filter(main -> main.food.equals(food))
+                .findFirst()
+                .orElse(null);
     }
 }

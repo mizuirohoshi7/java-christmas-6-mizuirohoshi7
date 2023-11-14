@@ -1,6 +1,6 @@
 package christmas.constant.menu;
 
-import static christmas.constant.error.ErrorMessage.INVALID_ORDER;
+import java.util.Arrays;
 
 public enum Dessert implements Menu {
 
@@ -26,11 +26,10 @@ public enum Dessert implements Menu {
         return price;
     }
 
-    public static Dessert of(String menu) {
-        try {
-            return valueOf(menu);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-        }
+    public static Dessert of(String food) {
+        return Arrays.stream(Dessert.values())
+                .filter(dessert -> dessert.getFood().equals(food))
+                .findFirst()
+                .orElse(null);
     }
 }

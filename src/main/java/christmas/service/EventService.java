@@ -1,8 +1,10 @@
 package christmas.service;
 
+import christmas.constant.discount.DiscountType;
 import christmas.dto.discount.DiscountResponse;
 import christmas.entity.date.VisitDate;
 import christmas.entity.order.Order;
+import java.util.Map;
 
 public class EventService {
 
@@ -18,6 +20,7 @@ public class EventService {
     }
 
     public DiscountResponse createDiscountResponse(VisitDate visitDate, Order order) {
-        return null;
+        Map<DiscountType, Integer> discountPriceByType = order.getDiscountPriceByType(visitDate);
+        return new DiscountResponse(discountPriceByType, order.getPriceBeforeDiscount());
     }
 }

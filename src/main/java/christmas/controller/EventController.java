@@ -64,6 +64,7 @@ public class EventController {
             isValidOrderInput(orderInput);
             Map<Menu, Integer> menuCounts = createMenuCounts(orderInput);
             isNotOnlyDrink(menuCounts);
+            isNotOverTwenty(menuCounts);
             return new Order(menuCounts);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
@@ -128,6 +129,12 @@ public class EventController {
 
     private void isNotOnlyDrink(Map<Menu, Integer> menuCounts) {
         if (menuCounts.keySet().stream().allMatch(menu -> menu instanceof Drink)) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
+        }
+    }
+
+    private void isNotOverTwenty(Map<Menu, Integer> menuCounts) {
+        if (menuCounts.values().stream().mapToInt(Integer::intValue).sum() > 20) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
         }
     }

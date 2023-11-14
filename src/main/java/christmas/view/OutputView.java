@@ -21,11 +21,11 @@ import java.util.Map;
 public class OutputView {
 
     public static void printStartMessage() {
-        System.out.println(START_MESSAGE);
+        System.out.println(START_MESSAGE.getMessage());
     }
 
     public static void printOrderResponse(OrderResponse orderResponse) {
-        System.out.println(PREVIEW_MESSAGE);
+        System.out.println(PREVIEW_MESSAGE.getMessage());
         System.out.println();
 
         printMenu(orderResponse.getMenuCounts());
@@ -37,32 +37,31 @@ public class OutputView {
 
     private static void printMenu(Map<Menu, Integer> menuCounts) {
         if (menuCounts.isEmpty()) {
-            System.out.println(NOTHING);
+            System.out.println(NOTHING.getMessage());
             return;
         }
 
-        System.out.println(MENU_COUNTS_MESSAGE);
+        System.out.println(MENU_COUNTS_MESSAGE.getMessage());
         menuCounts.forEach((menu, count) -> System.out.printf("%s %d개\n", menu.getFood(), count));
         System.out.println();
     }
 
     private static void printPriceBeforeDiscount(int priceBeforeDiscount) {
-        System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE);
+        System.out.println(PRICE_BEFORE_DISCOUNT_MESSAGE.getMessage());
         System.out.printf("%d원\n", priceBeforeDiscount);
+        System.out.println();
     }
 
     private static void printGiveawayMenu(String giveawayMenu) {
-        System.out.println(GIVEAWAY_MENU_MESSAGE);
+        System.out.println(GIVEAWAY_MENU_MESSAGE.getMessage());
         System.out.println(giveawayMenu);
+        System.out.println();
     }
 
     public static void printDiscountResponse(DiscountResponse discountResponse) {
         printDiscountBenefit(discountResponse.getDiscountPriceByType());
-
         printTotalDiscountPrice(discountResponse.getTotalDiscountPrice());
-
         printPriceAfterDiscount(discountResponse.getPriceAfterDiscount());
-
         printEventBadge(discountResponse.getEventBadge());
     }
 
@@ -77,19 +76,19 @@ public class OutputView {
     }
 
     private static void printTotalDiscountPrice(int totalDiscountPrice) {
-        System.out.println(TOTAL_DISCOUNT_PRICE_MESSAGE);
+        System.out.println(TOTAL_DISCOUNT_PRICE_MESSAGE.getMessage());
         System.out.printf("-%s원\n", NumberFormat.getInstance().format(totalDiscountPrice));
         System.out.println();
     }
 
     private static void printPriceAfterDiscount(int priceAfterDiscount) {
-        System.out.println(PRICE_AFTER_DISCOUNT_MESSAGE);
+        System.out.println(PRICE_AFTER_DISCOUNT_MESSAGE.getMessage());
         System.out.printf("%s원\n", NumberFormat.getInstance().format(priceAfterDiscount));
         System.out.println();
     }
 
     private static void printEventBadge(String eventBadge) {
-        System.out.println(EVENT_BADGE_MESSAGE);
+        System.out.println(EVENT_BADGE_MESSAGE.getMessage());
         System.out.println(eventBadge);
     }
 

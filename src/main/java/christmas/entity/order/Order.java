@@ -47,6 +47,9 @@ public class Order {
 
     public Map<DiscountType, Integer> getDiscountPriceByType(VisitDate visitDate) {
         Map<DiscountType, Integer> discountPriceByType = new HashMap<>();
+        if (isTotalPriceLessThanTenThousand()) {
+            return discountPriceByType;
+        }
 
         discountPriceByType.put(CHRISTMAS_D_DAY_DISCOUNT, calculateChristmasDDayDiscount(visitDate));
         discountPriceByType.put(WEEKDAY_DISCOUNT, calculateWeekdayDiscount(visitDate));
@@ -55,6 +58,10 @@ public class Order {
         discountPriceByType.put(GIVEAWAY_DISCOUNT, calculateGiveawayDiscount());
 
         return discountPriceByType;
+    }
+
+    private boolean isTotalPriceLessThanTenThousand() {
+        return getPriceBeforeDiscount() < 10000;
     }
 
     private int calculateChristmasDDayDiscount(VisitDate visitDate) {

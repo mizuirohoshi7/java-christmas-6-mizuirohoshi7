@@ -66,7 +66,7 @@ public class OutputView {
     }
 
     private static void printDiscountBenefit(Map<DiscountType, Integer> discountPriceByType) {
-        System.out.println(DISCOUNT_BENEFIT_MESSAGE);
+        System.out.println(DISCOUNT_BENEFIT_MESSAGE.getMessage());
         discountPriceByType.forEach((discountType, discountPrice) ->
                 System.out.printf(
                         "%s: -%s원\n",
